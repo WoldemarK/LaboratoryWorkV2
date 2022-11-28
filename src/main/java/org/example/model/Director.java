@@ -3,6 +3,7 @@ package org.example.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,16 +14,16 @@ public class Director {
     private String name;
     private int age;
 
-    @OneToMany(mappedBy = "director")
+    @OneToMany(mappedBy = "director",cascade = CascadeType.ALL)
     private List<Movie> moves;
 
     public Director() {
     }
 
-    public Director(String name, int age, List<Movie> moves) {
+    public Director(String name, int age) {
         this.name = name;
         this.age = age;
-        this.moves = moves;
+        this.moves = new ArrayList<>();
     }
 
     public int getId() {
@@ -63,7 +64,7 @@ public class Director {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-       ", moves=" + moves +
+              //  ", moves=" + moves +
                 '}';
     }
 }

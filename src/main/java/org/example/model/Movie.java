@@ -13,17 +13,18 @@ public class Movie {
     @Column(name = "year_of_production")
     private int yearOfProduction;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "director_id", referencedColumnName = "id")
     private Director director;
 
     public Movie() {
     }
 
-    public Movie(String name, int yearOfProduction, Director director) {
+    public Movie(String name, int yearOfProduction,Director director) {
         this.name = name;
         this.yearOfProduction = yearOfProduction;
         this.director = director;
+
     }
 
     public int getId() {
@@ -64,7 +65,6 @@ public class Movie {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", year_of_production=" + yearOfProduction +
-          //  ", director=" + director +
                 '}';
     }
 }
